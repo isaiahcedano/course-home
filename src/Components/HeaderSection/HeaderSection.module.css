@@ -1,0 +1,19 @@
+.headerSection__link {
+  color: #8a8a8a;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 56px;
+  -webkit-transition: all 200ms ease;
+  -moz-transition: all 200ms ease;
+  -ms-transition: all 200ms ease;
+  -o-transition: all 200ms ease;
+  transition: all 200ms ease;
+  text-decoration: none;
+}
+
+@media only screen and (max-width: 991px) {
+  .headerSection__link {
+     font-size: 12px;
+     line-height: 40px;
+  }
+}
