@@ -2,6 +2,9 @@ import {
   ADD_TO_CART,
   UPDATE_CART,
   ELIMINATE_ITEM,
+  REQUEST_PRODUCT_DATABASE_PENDING,
+  REQUEST_PRODUCT_DATABASE_REJECTED,
+  REQUEST_PRODUCT_DATABASE_RESOLVED
 } from '../actiontypes';
 
 const initialcart = JSON.parse(localStorage.getItem("cart")) || [[],0];
@@ -45,6 +48,20 @@ export const changeCart = (state=initialcart, action={}) => {
       localStorage.setItem("cart", JSON.stringify(newState));
 
       return newState;
+    default:
+      return state;
+  }
+}
+
+const initialproducts = JSON.parse(localStorage.getItem("products")) || [];
+
+export const changeProducts = (state=initialproducts, action={}) => {
+  switch(action.type) {
+    case REQUEST_PRODUCT_DATABASE_PENDING || REQUEST_PRODUCT_DATABASE_REJECTED:
+      return state;
+    case REQUEST_PRODUCT_DATABASE_RESOLVED:
+      localStorage.setItem("products", JSON.stringify(action.payload));
+      return action.payload;
     default:
       return state;
   }

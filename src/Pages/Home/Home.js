@@ -1,9 +1,9 @@
 import Header from '../../Containers/Header/Header';
 
-const Home = () => {
+const Home = ({products}) => {
   return (
     <>
-      <Header/>
+      <Header products={products}/>
     </>
   );
 };

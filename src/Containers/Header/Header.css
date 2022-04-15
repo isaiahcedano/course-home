@@ -1,0 +1,9 @@
+@media (max-width: 580px) {
+  .main_nav_content, .page_menu_content {
+    z-index: 100;
+  }
+
+  .logo img {
+    z-index: 1;
+  }
+}
