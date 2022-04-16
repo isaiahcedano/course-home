@@ -5,3 +5,29 @@ body {
   background: #FFFFFF;
   color: #000000;
 }
+
+.sidebar-item {
+  cursor: pointer;
+}
+
+.sidebar-item:active, .sidebar-item:focus, .sidebar-item:hover {
+  color: #007bff;
+}
+
+.product_item {
+  width: 100%;
+  position: relative;
+}
+
+.product_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-column-gap: 100px;
+  height: initial !important;
+}
+
+.product_image img {
+    display: block;
+    position: relative;
+    max-width: 100px;
+}

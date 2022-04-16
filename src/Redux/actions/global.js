@@ -30,12 +30,16 @@ export const eliminateItem = item => ({
 });
 
 export const setProductDatabase = () => async dispatch => {
+  console.log("setProductDatabase is being called");
   if (!JSON.parse(localStorage.getItem("products"))) {
     try {
       const fetchBase = "http://localhost:3001";
       dispatch({
         type: REQUEST_PRODUCT_DATABASE_PENDING
       });
+
+      console.log("dispatched product database pending");
+
 
       const products = await fetch(`${fetchBase}/products`)
       .then(resp => resp.json());

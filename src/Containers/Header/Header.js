@@ -22,6 +22,7 @@ const Header = ({addToCart,
                 updateCart,
                 cart,
                 products}) => {
+  console.log("Header", products);
 
   return (
     <header className="header">

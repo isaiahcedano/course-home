@@ -14,8 +14,11 @@ const mapStateToProps = state => ({
 
 const App = ({products, setDatabase}) => {
 
+
+
   useEffect(() => {
     setDatabase();
+    console.log("App", products);
   }, []);
 
   return (
