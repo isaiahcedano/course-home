@@ -1,4 +1,6 @@
-const ProductItem = ({imgSrc, price, productName, href}) => {
+import {Link} from 'react-router-dom';
+
+const ProductItem = ({imgSrc, price, productName, cb, href}) => {
   return (
     <div
       className={"product_item"}
@@ -16,22 +18,16 @@ const ProductItem = ({imgSrc, price, productName, href}) => {
         <div className="product_price">{`$${price}`}</div>
         <div className="product_name">
           <div>
-            <a
-              href={href}
+          <Link
+              to={`/${href}`}
               tabIndex={0}
+              onClick={cb}
             >
               {productName}
-            </a>
+          </Link>
           </div>
         </div>
       </div>
-      <div className="product_fav">
-        <i className="fas fa-heart" />
-      </div>
-      <ul className="product_marks">
-        <li className="product_mark product_discount">-25%</li>
-        <li className="product_mark product_new">new</li>
-      </ul>
     </div>
   );
 };

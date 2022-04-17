@@ -54,8 +54,9 @@ const Cart = ({products, cart}) => {
             </a>
           </div>
           <div className="cart_price">{`$${cart[0].reduce((curr, {item, quantity}) => {
-            const productInfo = getInfo(products, item);
-            return curr + (productInfo.price*quantity);
+            const productInfo = getInfo(products, item)[0];
+            const digit = curr + (productInfo.price*quantity);
+            return Number((Math.round(digit*100)/100).toFixed(2));
           }, 0)}`}</div>
         </div>
       </div>

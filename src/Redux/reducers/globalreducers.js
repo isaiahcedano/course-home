@@ -53,7 +53,7 @@ export const changeCart = (state=initialcart, action={}) => {
   }
 }
 
-const initialproducts = JSON.parse(localStorage.getItem("products")) || [];
+const initialproducts = JSON.parse(localStorage.getItem("products")) || {};
 
 export const changeProducts = (state=initialproducts, action={}) => {
   switch(action.type) {

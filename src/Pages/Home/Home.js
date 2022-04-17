@@ -4,16 +4,14 @@ import HomeShop from '../../Containers/HomeShop/HomeShop';
 
 const Home = ({products}) => {
 
-  console.log("Home", products);
-
   return (
     <>
-      <Header products={products}/>
       <MidHomeSection text={"You have an opportunity, take it."}/>
       {
-        !Array.isArray(products) ? <HomeShop products={products}/> : null
-      }
 
+        Object.entries(products).length ?
+        <HomeShop products={products}/> : null
+      }
     </>
   );
 };

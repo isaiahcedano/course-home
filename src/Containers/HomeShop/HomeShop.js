@@ -2,6 +2,9 @@ import ProductItem from '../../Components/ProductItem/ProductItem';
 import SideBar from '../../Components/SideBar/SideBar';
 import UpperShopBar from '../../Components/UpperShopBar/UpperShopBar';
 import {useState, useEffect} from 'react';
+import {connect} from 'react-redux';
+import {changeRoute} from '../../Redux/actions/SingleProduct/actions';
+import {Link} from 'react-router-dom';
 
 const waitForElm = selector => {
     return new Promise(resolve => {
@@ -22,8 +25,18 @@ const waitForElm = selector => {
     });
 }
 
-const HomeShop = ({amountOfProducts, products}) => {
+const mapDispatchToProps = dispatch => ({
+  setRoute: route => dispatch(changeRoute(route)),
+});
+
+const mapStateToProps = state => ({
+  route: state.changeRoute,
+});
+
+const HomeShop = ({amountOfProducts, products, route, setRoute}) => {
   const [selectedCategory, setSelectedCategory] = useState(Object.keys(products)[0]);
+  const [searchBar, setSearchBar] = useState("");
+
 
   useEffect(() => {
     waitForElm(".sidebar-item").then(ele => ele[1].click());
@@ -47,53 +60,28 @@ const HomeShop = ({amountOfProducts, products}) => {
               <UpperShopBar amountOfProducts={products[selectedCategory].reduce((acc, item) => {
                     acc = acc + 1;
                     return acc;
-                }, 0)}/>
+                }, 0)} changeSearch={(e) => {
+                  setSearchBar(e.target.value);
+                }}/>
               <div className="product_grid" style={{ position: "relative", height: 1012 }}>
                 {
-                  products[selectedCategory].map(({title, price, imgSrc}) => {
-                      return <ProductItem productName={title}
-                                   key={title}
-                                   href={"#"}
-                                   imgSrc={imgSrc}
-                                   price={price}/>
-                               })
+                  products[selectedCategory].filter(({title}) => title.toLowerCase().includes(searchBar.toLowerCase()))
+                  .map(({title, price, imgSrc}) => {
+                    return <ProductItem productName={title}
+                                 key={title}
+                                 cb={() => setRoute(title)}
+                                 href={"course"}
+                                 imgSrc={imgSrc}
+                                 price={price}/>
+                             })
+                }
+                {
+                  !products[selectedCategory]
+                  .filter(({title}) =>
+                  title.toLowerCase().includes(searchBar.toLowerCase())).length ?
+                  <p className={"no-search-results"}>No results. <Link to={"/request"}>Request the course you're looking for.</Link></p> : null
                 }
 
-              </div>
-              <div className="shop_page_nav d-flex flex-row">
-                <div className="page_prev d-flex flex-column align-items-center justify-content-center">
-                  <i className="fas fa-chevron-left" />
-                </div>
-                <ul className="page_nav d-flex flex-row">
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
-                      1
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
-                      2
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
-                      3
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
-                      ...
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
-                      21
-                    </a>
-                  </li>
-                </ul>
-                <div className="page_next d-flex flex-column align-items-center justify-content-center">
-                  <i className="fas fa-chevron-right" />
-                </div>
               </div>
             </div>
           </div>
@@ -103,4 +91,4 @@ const HomeShop = ({amountOfProducts, products}) => {
   )
 }
 
-export default HomeShop;
+export default connect(mapStateToProps, mapDispatchToProps)(HomeShop);
