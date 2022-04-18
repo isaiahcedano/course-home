@@ -131,3 +131,11 @@ body {
 .top_bar {
   display: block !important;
 }
+
+.dmca-container {
+  margin-top: 15px;
+}
+
+.dmca-container > p, .dmca-container ul {
+  margin-bottom: 40px;
+}

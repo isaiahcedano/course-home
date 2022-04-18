@@ -8,3 +8,7 @@
 .cd-faq__trigger {
   color: black;
 }
+
+.cd-faq__items--slide-in {
+  z-index: 1500;
+}
