@@ -25,6 +25,25 @@ const Header = ({addToCart,
                 cart,
                 products}) => {
 
+  const headerLinks = [
+    {
+      title: "Home",
+      link: "/home",
+    },
+    {
+      title: "FAQ",
+      link: "/faq"
+    },
+    {
+      title: "DMCA",
+      link: "/dmca"
+    },
+    {
+      title: "Request Course",
+      link: "/request"
+    }
+  ]
+
   return (
     <>
       <header className="header">
@@ -93,31 +112,13 @@ const Header = ({addToCart,
             <div className="main_nav_content d-flex flex-row">
               <div className="main_nav_menu">
                 <ul className="standard_dropdown main_nav_dropdown">
-                  <li>
-                    <Link to="home">
-                      Home <i className="fas fa-chevron-down" />
-                    </Link>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/blog.html">
-                      FAQ <i className="fas fa-chevron-down" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/contact.html">
-                      DMCA <i className="fas fa-chevron-down" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/contact.html">
-                      Request Course <i className="fas fa-chevron-down" />
-                    </a>
-                  </li>
-                  <li>
-                    <a href="https://preview.colorlib.com/theme/onetech/contact.html">
-                      Contact <i className="fas fa-chevron-down" />
-                    </a>
-                  </li>
+                  {
+                    headerLinks.map(({title, link}) => <li>
+                      <Link to={link}>
+                        {title} <i className="fas fa-chevron-down" />
+                      </Link>
+                    </li>)
+                  }
                 </ul>
               </div>
               <div className="menu_trigger_container ml-auto">

@@ -14,6 +14,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   addToCart: (item, quantity) => dispatch(globalActions.addToCart(item, quantity)),
   updateCart: (item, quantity) => dispatch(globalActions.updateCart(item, quantity)),
+  eliminateItem: item => dispatch(globalActions.eliminateItem(item)),
 })
 
 const SingleProduct = ({imgSrc,
@@ -23,6 +24,7 @@ const SingleProduct = ({imgSrc,
                         price,
                         cart,
                         addToCart,
+                        eliminateItem,
                         updateCart,
                         salesPage}) => {
 
@@ -74,16 +76,18 @@ const SingleProduct = ({imgSrc,
                     <div className={`${classes.cartAdder} cartAdder`}>
                       <div onMouseOver={()=>{setCartBgColor(true)}}
                         onClick={()=>{
+                          const foundItem = cart.map(list =>
+                            Array.isArray(list) ?
+                            list.filter(({item, quantity}) => item===title)
+                            : null)[0];
                           if (!cart[0].filter(({item}) => item===title).length) {
-                            const foundItem = cart.map(list =>
-                              Array.isArray(list) ?
-                              list.filter(({item, quantity}) => item===title)
-                              : null)[0];
                             if (foundItem.length) {
                               updateCart(title, 1);
                             } else {
                               addToCart(title, 1);
                             }
+                          } else {
+                            eliminateItem(title);
                           }
                         }}
                         onMouseOut={()=>{setCartBgColor(false)}}>

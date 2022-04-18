@@ -6,6 +6,7 @@ import {changeRoute} from './Redux/actions/SingleProduct/actions';
 import {useEffect} from 'react';
 import Header from './Containers/Header/Header';
 import SingleProductTransition from './Pages/SingleProductTransition/SingleProductTransition';
+import FAQPage from './Pages/FAQPage/FAQPage';
 
 const mapDispatchToProps = dispatch => ({
   setDatabase: () => dispatch(globalactions.setProductDatabase()),
@@ -25,6 +26,7 @@ const App = ({products, setDatabase, route, setRoute}) => {
       <Route path={"*"} element={<Header products={products}/>}>
         <Route path={"home"} element={<Home products={products}/>}/>
         <Route path={"course"} element={<SingleProductTransition products={products}/>}/>
+        <Route path={"faq"} element={<FAQPage/>}/>
         <Route path={"*"} element={<Home products={products}/>}/>
       </Route>
     </Routes>
