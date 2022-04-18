@@ -73,14 +73,14 @@ const Header = ({addToCart,
                       />
                     </div>
                     <div>
-                      <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
+                      <Link to={"/register"}>
                         Register
-                      </a>
+                      </Link>
                     </div>
                     <div>
-                      <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
+                      <Link to={"/login"}>
                         Sign in
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

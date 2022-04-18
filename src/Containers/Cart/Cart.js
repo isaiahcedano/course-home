@@ -1,4 +1,5 @@
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 
 const mapStateToProps = state => ({
   products: JSON.parse(localStorage.getItem("products")) || state.changeProducts,
@@ -49,15 +50,15 @@ const Cart = ({products, cart}) => {
         </div>
         <div className="cart_content">
           <div className="cart_text">
-            <a href="https://preview.colorlib.com/theme/onetech/shop.html#">
+            <Link to="/cart">
               Cart
-            </a>
+            </Link>
           </div>
-          <div className="cart_price">{`$${cart[0].reduce((curr, {item, quantity}) => {
+          <Link to={"/cart"} className="cart_price">{`$${cart[0].reduce((curr, {item, quantity}) => {
             const productInfo = getInfo(products, item)[0];
             const digit = curr + (productInfo.price*quantity);
             return Number((Math.round(digit*100)/100).toFixed(2));
-          }, 0)}`}</div>
+          }, 0)}`}</Link>
         </div>
       </div>
     </div>

@@ -4,7 +4,8 @@ import {
   ELIMINATE_ITEM,
   REQUEST_PRODUCT_DATABASE_PENDING,
   REQUEST_PRODUCT_DATABASE_REJECTED,
-  REQUEST_PRODUCT_DATABASE_RESOLVED
+  REQUEST_PRODUCT_DATABASE_RESOLVED,
+  ELIMINATE_ALL_ITEMS
 } from '../actiontypes';
 
 
@@ -27,6 +28,10 @@ export const updateCart = (item, quantity) => ({
 export const eliminateItem = item => ({
   type: ELIMINATE_ITEM,
   payload: {item},
+});
+
+export const eliminateAllItems = () => ({
+  type: ELIMINATE_ALL_ITEMS,
 });
 
 export const setProductDatabase = () => async dispatch => {
@@ -56,7 +61,8 @@ const globals = {
   addToCart,
   updateCart,
   eliminateItem,
-  setProductDatabase
+  setProductDatabase,
+  eliminateAllItems
 };
 
 export default globals;

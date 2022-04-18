@@ -4,7 +4,8 @@ import {
   ELIMINATE_ITEM,
   REQUEST_PRODUCT_DATABASE_PENDING,
   REQUEST_PRODUCT_DATABASE_REJECTED,
-  REQUEST_PRODUCT_DATABASE_RESOLVED
+  REQUEST_PRODUCT_DATABASE_RESOLVED,
+  ELIMINATE_ALL_ITEMS
 } from '../actiontypes';
 
 const initialcart = JSON.parse(localStorage.getItem("cart")) || [[],0];
@@ -45,6 +46,12 @@ export const changeCart = (state=initialcart, action={}) => {
         return curr;
       }, []);
       newState[1] = newState[0].reduce((curr, {quantity}) => curr + quantity, 0);
+      localStorage.setItem("cart", JSON.stringify(newState));
+
+      return newState;
+    case ELIMINATE_ALL_ITEMS:
+      newState[0] = [];
+      newState[1] = 0;
       localStorage.setItem("cart", JSON.stringify(newState));
 
       return newState;

@@ -9,6 +9,10 @@ import SingleProductTransition from './Pages/SingleProductTransition/SingleProdu
 import FAQPage from './Pages/FAQPage/FAQPage';
 import CourseRequestPage from './Pages/CourseRequest/CourseRequest';
 import DMCAPage from './Pages/DMCA/DMCA';
+import CartPage from './Pages/CartPage/CartPage';
+import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
+import LoginPage from './Pages/LoginPage/LoginPage';
+import RegisterPage from './Pages/RegisterPage/RegisterPage';
 
 const mapDispatchToProps = dispatch => ({
   setDatabase: () => dispatch(globalactions.setProductDatabase()),
@@ -31,6 +35,10 @@ const App = ({products, setDatabase, route, setRoute}) => {
         <Route path={"faq"} element={<FAQPage/>}/>
         <Route path={"request"} element={<CourseRequestPage/>}/>
         <Route path={"dmca"} element={<DMCAPage/>}/>
+        <Route path={"cart"} element={<CartPage/>}/>
+        <Route path={"checkout"} element={<CheckoutPage/>}/>
+        <Route path={"login"} element={<LoginPage/>}/>
+        <Route path={"register"} element={<RegisterPage/>}/>
         <Route path={"*"} element={<Home products={products}/>}/>
       </Route>
     </Routes>
