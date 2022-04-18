@@ -355,6 +355,19 @@ const FAQPage = () => {
               </div>{" "}
               {/* cd-faq__content */}
             </li>
+            <li className="cd-faq__item">
+              <a className="cd-faq__trigger" href="#0">
+                <span>How long does it take for requested courses to be uploaded to the platform?</span>
+              </a>
+              <div className="cd-faq__content">
+                <div className="text-component">
+                  <p>
+                    We will do everything in our power to make sure the requested course is uploaded to the platform, so our customers can recieve a proper education, and this might take 2-7 days if the course is available, otherwise we will inform the requester the news.
+                  </p>
+                </div>
+              </div>{" "}
+              {/* cd-faq__content */}
+            </li>
           </ul>{" "}
           {/* cd-faq__group */}
           <ul id="payments" className="cd-faq__group">
