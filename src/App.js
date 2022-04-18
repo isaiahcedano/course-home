@@ -7,6 +7,8 @@ import {useEffect} from 'react';
 import Header from './Containers/Header/Header';
 import SingleProductTransition from './Pages/SingleProductTransition/SingleProductTransition';
 import FAQPage from './Pages/FAQPage/FAQPage';
+import CourseRequestPage from './Pages/CourseRequest/CourseRequest';
+import DMCAPage from './Pages/DMCA/DMCA';
 
 const mapDispatchToProps = dispatch => ({
   setDatabase: () => dispatch(globalactions.setProductDatabase()),
@@ -27,6 +29,8 @@ const App = ({products, setDatabase, route, setRoute}) => {
         <Route path={"home"} element={<Home products={products}/>}/>
         <Route path={"course"} element={<SingleProductTransition products={products}/>}/>
         <Route path={"faq"} element={<FAQPage/>}/>
+        <Route path={"request"} element={<CourseRequestPage/>}/>
+        <Route path={"dmca"} element={<DMCAPage/>}/>
         <Route path={"*"} element={<Home products={products}/>}/>
       </Route>
     </Routes>
