@@ -421,3 +421,9 @@ button {
 .cart_section {
   margin-bottom: 100px;
 }
+
+
+.header-user-active {
+  display: flex;
+  align-items: center;
+}

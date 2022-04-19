@@ -13,24 +13,75 @@ import CartPage from './Pages/CartPage/CartPage';
 import CheckoutPage from './Pages/CheckoutPage/CheckoutPage';
 import LoginPage from './Pages/LoginPage/LoginPage';
 import RegisterPage from './Pages/RegisterPage/RegisterPage';
+import {useLocation} from 'react-router-dom';
 
 const mapDispatchToProps = dispatch => ({
   setDatabase: () => dispatch(globalactions.setProductDatabase()),
+  resetLogin: () => dispatch(globalactions.resetLogin()),
 });
 
 const mapStateToProps = state => ({
-  products: JSON.parse(localStorage.getItem("products")) || state.changeProducts,
+  products: state.changeProducts,
+  loggedIn: state.changeLogin,
+  registered: state.changeRegistered
 });
 
-const App = ({products, setDatabase, route, setRoute}) => {
+const validSignin = async (logState, storage) => {
+  const validToken = async token => {
+    return await fetch("https://house-of-courses-api.herokuapp.com/check", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token,
+      })
+    }).then(resp => resp.json());
+  }
+  const [loggedIn, token] = logState;
+  const isValidToken = await validToken(token);
+  if (storage) {
+    const isStorageValidToken = await validToken(storage[1]);
+    return Boolean(storage[0] && isStorageValidToken);
+  }
+  return Boolean(loggedIn && isValidToken);
+};
+
+const App = ({products,
+              setDatabase,
+              resetLogin,
+              route,
+              setRoute,
+              loggedIn,
+              registered}) => {
+  const location = useLocation();
+
   useEffect(() => {
-    setDatabase();
-  }, []);
+    if (!Object.entries(products).length) {
+      setDatabase();
+    }
+
+    if (loggedIn[0]) {
+      validSignin(loggedIn, JSON.parse(localStorage.getItem("login")))
+        .then(valid => {
+          if (!valid) {
+            resetLogin();
+          }
+        });
+    }
+
+  }, [location]);
 
   return (
     <Routes>
-      <Route path={"login"} element={<LoginPage/>}/>
-      <Route path={"register"} element={<RegisterPage/>}/>
+      {
+        !loggedIn[0] ? <Route path={"login"} element={<LoginPage/>}/> :
+        null
+      }
+      {
+        !loggedIn[0] ? <Route path={"register"} element={<RegisterPage/>}/> :
+        null
+      }
       <Route path={"*"} element={<Header products={products}/>}>
         <Route path={"home"} element={<Home products={products}/>}/>
         <Route path={"course"} element={<SingleProductTransition products={products}/>}/>

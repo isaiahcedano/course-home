@@ -2,15 +2,18 @@ import {connect} from 'react-redux';
 import {Link} from 'react-router-dom';
 import globalActions from '../../Redux/actions/global';
 import {changeRoute} from '../../Redux/actions/SingleProduct/actions';
+import {useState, useEffect} from 'react';
 
 const mapDispatchToProps = dispatch => ({
   eliminateAll: () => dispatch(globalActions.eliminateAllItems()),
-  setRoute: route => dispatch(changeRoute(route))
+  setRoute: route => dispatch(changeRoute(route)),
+  setLogin: credentials => dispatch(globalActions.changeLogin(credentials)),
 });
 
 const mapStateToProps = state => ({
   cart: state.changeCart,
   products: state.changeProducts,
+  loggedIn: state.changeLogin,
 });
 
 const getInfo = (db, item) => {
@@ -43,7 +46,7 @@ const getPrice = (quantity, price) => {
   return Number((Math.round(digit*100)/100).toFixed(2));
 }
 
-const CartPage = ({cart, products, eliminateAll, setRoute}) => {
+const CartPage = ({cart, products, eliminateAll, setRoute, loggedIn}) => {
   return (
     <>
       <div className="cart_section">
@@ -107,7 +110,7 @@ const CartPage = ({cart, products, eliminateAll, setRoute}) => {
                   <button type="button" className="button cart_button_clear" onClick={eliminateAll}>
                     Clear Cart
                   </button>
-                  <Link className="button cart_button_checkout" to={"/checkout"}>
+                  <Link className="button cart_button_checkout" to={`${loggedIn[0] ? '/checkout' : '/login'}`}>
                     Checkout
                   </Link>
                 </div>
@@ -116,8 +119,6 @@ const CartPage = ({cart, products, eliminateAll, setRoute}) => {
           </div>
         </div>
       </div>
-
-
     </>
   );
 };

@@ -1,8 +1,32 @@
 import './RegisterPage.css';
 import logo from './logo.png';
 import {Link} from 'react-router-dom';
+import {connect} from 'react-redux';
+import globalActions from '../../Redux/actions/global';
+import {useForm} from 'react-hook-form';
 
-const RegisterPage = () => {
+
+const mapDispatchToProps = dispatch => ({
+  registerUser: credentials => new Promise((resolve, reject) =>
+         dispatch(globalActions.registerUser(credentials, resolve, reject))),
+});
+
+const mapStateToProps = state => ({
+  registered: state.changeRegistered,
+});
+
+const RegisterPage = ({registerUser, registered}) => {
+  const {handleSubmit, register} = useForm();
+
+  const formSubmission = async data => {
+    try {
+      const response = await registerUser(data);
+      alert("Registered successfully!");
+    } catch(err) {
+      alert("Server error");
+    }
+  }
+
   return (
     <>
       <div className="login-10">
@@ -15,8 +39,8 @@ const RegisterPage = () => {
                     <img src={logo} alt="logo" />
                   </Link>
                 </div>
-                <h3>Create An Cccount</h3>
-                <form action="#" method="GET">
+                <h3>Create An Account</h3>
+                <form action="#" onSubmit={handleSubmit(formSubmission)}>
                   <div className="form-group">
                     <input
                       type="text"
@@ -24,6 +48,9 @@ const RegisterPage = () => {
                       className="form-control"
                       placeholder="Full Name"
                       aria-label="Full Name"
+                      {...register("name", {
+                        required: true
+                      })}
                     />
                   </div>
                   <div className="form-group">
@@ -33,6 +60,9 @@ const RegisterPage = () => {
                       className="form-control"
                       placeholder="Email Address"
                       aria-label="Email Address"
+                      {...register("email", {
+                        required: true
+                      })}
                     />
                   </div>
                   <div className="form-group clearfix">
@@ -43,6 +73,9 @@ const RegisterPage = () => {
                       autoComplete="off"
                       placeholder="Password"
                       aria-label="Password"
+                      {...register("pass", {
+                        required: true
+                      })}
                     />
                   </div>
                   <div className="form-group mb-0 clearfix">
@@ -68,4 +101,4 @@ const RegisterPage = () => {
   );
 };
 
-export default RegisterPage;
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterPage);

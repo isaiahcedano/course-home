@@ -5,7 +5,14 @@ import {
   REQUEST_PRODUCT_DATABASE_PENDING,
   REQUEST_PRODUCT_DATABASE_REJECTED,
   REQUEST_PRODUCT_DATABASE_RESOLVED,
-  ELIMINATE_ALL_ITEMS
+  ELIMINATE_ALL_ITEMS,
+  LOGIN_PENDING,
+  LOGIN_REJECTED,
+  LOGIN_RESOLVED,
+  REGISTER_REJECTED,
+  REGISTER_RESOLVED,
+  REGISTER_PENDING,
+  LOGIN_RESET
 } from '../actiontypes';
 
 const initialcart = JSON.parse(localStorage.getItem("cart")) || [[],0];
@@ -69,6 +76,45 @@ export const changeProducts = (state=initialproducts, action={}) => {
     case REQUEST_PRODUCT_DATABASE_RESOLVED:
       localStorage.setItem("products", JSON.stringify(action.payload));
       return action.payload;
+    default:
+      return state;
+  }
+};
+
+const initialLogin = JSON.parse(localStorage.getItem("login")) || [false, ""];
+
+export const changeLogin = (state=initialLogin, action={}) => {
+  switch (action.type) {
+    case LOGIN_PENDING || LOGIN_REJECTED:
+      return state;
+    case LOGIN_RESOLVED:
+      localStorage.setItem('login', JSON.stringify([true, action.payload]));
+      return [true, action.payload];
+    case LOGIN_RESET:
+      fetch("https://house-of-courses-api.herokuapp.com/kill", {
+        method: "POST",
+        body: JSON.stringify({
+          token: JSON.parse(localStorage.getItem("login")) || initialLogin[0]
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        }
+      });
+      localStorage.setItem("login", JSON.stringify([false, ""]));
+      return [false, ""];
+    default:
+      return state;
+  }
+};
+
+const initialRegister = false;
+
+export const changeRegistered = (state=initialRegister, action={}) => {
+  switch (action.type) {
+    case REGISTER_PENDING || REGISTER_REJECTED:
+      return state;
+    case REGISTER_RESOLVED:
+      return true;
     default:
       return state;
   }

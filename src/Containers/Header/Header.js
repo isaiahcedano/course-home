@@ -3,19 +3,21 @@ import logo from './icons/logo.png';
 import arrowBottom from './icons/arrowBottom.png';
 import {connect} from 'react-redux';
 import globalActions from '../../Redux/actions/global';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import Cart from '../Cart/Cart';
 import './Header.css';
 import {Outlet} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 
 const mapStateToProps = state => ({
-  cart: JSON.parse(localStorage.getItem("cart")) || state.changeCart,
+  cart: state.changeCart,
+  loggedIn: state.changeLogin,
 });
 
 const mapDispatchToProps = dispatch => ({
   addToCart: (item, quantity) => dispatch(globalActions.addToCart(item, quantity)),
   updateCart: (item, quantity) => dispatch(globalActions.updateCart(item, quantity)),
+  resetLogin: () => dispatch(globalActions.resetLogin()),
 });
 
 
@@ -23,6 +25,8 @@ const mapDispatchToProps = dispatch => ({
 const Header = ({addToCart,
                 updateCart,
                 cart,
+                loggedIn,
+                resetLogin,
                 products}) => {
 
   const headerLinks = [
@@ -44,6 +48,24 @@ const Header = ({addToCart,
     }
   ]
 
+  const [username, setUsername] = useState("User");
+
+  useEffect(() => {
+    fetch("https://house-of-courses-api.herokuapp.com/user", {
+      method: "POST",
+      body: JSON.stringify({
+        token: loggedIn[1],
+      }),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    }).then(resp => resp.json()).then(user => {
+      if (user) {
+        setUsername(user.match(/^\S+/)[0])
+      }
+    })
+  }, [loggedIn])
+
   return (
     <>
       <header className="header">
@@ -62,7 +84,7 @@ const Header = ({addToCart,
                   </div>
                   <a href="mailto:coursehome22@gmail.com">coursehome22@gmail.com</a>
                 </div>
-                <div className="top_bar_content ml-auto">
+                <div className={`top_bar_content ml-auto ${loggedIn ? 'header-user-active' : ''}`}>
                   <div className="top_bar_user">
                     <div className="user_icon">
                       <img
@@ -72,16 +94,33 @@ const Header = ({addToCart,
                         onLoad="pagespeed.CriticalImages.checkImageForCriticality(this);"
                       />
                     </div>
-                    <div>
-                      <Link to={"/register"}>
-                        Register
-                      </Link>
-                    </div>
-                    <div>
-                      <Link to={"/login"}>
-                        Sign in
-                      </Link>
-                    </div>
+                    {
+                      !loggedIn[0] ?
+                      <>
+                        <div>
+                          <Link to={"/register"}>
+                            Register
+                          </Link>
+                        </div>
+                        <div>
+                          <Link to={"/login"}>
+                            Sign in
+                          </Link>
+                        </div>
+                      </> : <>
+                        <div>
+                          <Link to={"/home"}>
+                            {`Welcome ${username}`}
+                          </Link>
+                        </div>
+                        <div>
+                          <Link to={"/home"} onClick={resetLogin}>
+                            Sign out
+                          </Link>
+                        </div>
+                      </>
+                    }
+
                   </div>
                 </div>
               </div>

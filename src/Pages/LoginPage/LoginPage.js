@@ -1,7 +1,29 @@
 import logo from './logo.png';
 import {Link} from 'react-router-dom';
+import {useForm} from 'react-hook-form';
+import {connect} from 'react-redux';
+import globalActions from '../../Redux/actions/global';
 
-const LoginPage = () => {
+const mapDispatchToProps = dispatch => ({
+  login: credentials => new Promise((resolve, reject) =>
+         dispatch(globalActions.loginUser(credentials, resolve, reject))),
+});
+
+const mapStateToProps = state => ({
+  loggedIn: state.changeLogin,
+});
+
+const LoginPage = ({login, loggedIn}) => {
+  const {handleSubmit, register} = useForm();
+
+  const formSubmission = async data => {
+    try {
+      const response = await login(data);
+    } catch(err) {
+      alert("Invalid username or password.");
+    }
+  }
+
   return (
     <>
       <div className="login-10">
@@ -15,7 +37,7 @@ const LoginPage = () => {
                   </Link>
                 </div>
                 <h3>Sign Into Your Account</h3>
-                <form action="#" method="GET">
+                <form action="#" onSubmit={handleSubmit(formSubmission)}>
                   <div className="form-group">
                     <input
                       type="email"
@@ -23,6 +45,9 @@ const LoginPage = () => {
                       className="form-control"
                       placeholder="Email Address"
                       aria-label="Email Address"
+                      {...register("email", {
+                        required: true
+                      })}
                     />
                   </div>
                   <div className="form-group clearfix">
@@ -33,6 +58,9 @@ const LoginPage = () => {
                       autoComplete="off"
                       placeholder="Password"
                       aria-label="Password"
+                      {...register("pass", {
+                        required: true
+                      })}
                     />
                   </div>
                   <div className="form-group mb-0 clearfix">
@@ -58,4 +86,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
