@@ -29,6 +29,8 @@ const App = ({products, setDatabase, route, setRoute}) => {
 
   return (
     <Routes>
+      <Route path={"login"} element={<LoginPage/>}/>
+      <Route path={"register"} element={<RegisterPage/>}/>
       <Route path={"*"} element={<Header products={products}/>}>
         <Route path={"home"} element={<Home products={products}/>}/>
         <Route path={"course"} element={<SingleProductTransition products={products}/>}/>
@@ -37,8 +39,6 @@ const App = ({products, setDatabase, route, setRoute}) => {
         <Route path={"dmca"} element={<DMCAPage/>}/>
         <Route path={"cart"} element={<CartPage/>}/>
         <Route path={"checkout"} element={<CheckoutPage/>}/>
-        <Route path={"login"} element={<LoginPage/>}/>
-        <Route path={"register"} element={<RegisterPage/>}/>
         <Route path={"*"} element={<Home products={products}/>}/>
       </Route>
     </Routes>

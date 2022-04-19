@@ -52,7 +52,7 @@ const SingleProduct = ({imgSrc,
               />
             </div>
           </div>
-          <div className="col-lg-5 order-3">
+          <div className="col-lg-5 order-2">
             <div className="product_description">
               <div className="product_category">{category}</div>
               <div className="product_name">{title}</div>
@@ -105,6 +105,9 @@ const SingleProduct = ({imgSrc,
                 </form>
               </div>
             </div>
+          </div>
+          <div className={"col-lg-5 order-3"}>
+            <a href={salesPage}>Sales Page</a>
           </div>
         </div>
       </div>

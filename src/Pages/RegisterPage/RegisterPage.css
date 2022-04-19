@@ -1,0 +1,162 @@
+.login-10 {
+    top: 0;
+    width: 100%;
+    text-align: center;
+    bottom: 0;
+    opacity: 1;
+    z-index: 999;
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    background: linear-gradient(to bottom right, #17ffff 0%, #2500b7e8 100%);
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    color: #424242;
+    margin: 0;
+    font-family: var(--bs-font-sans-serif);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+@media (min-width: 576px)
+.container, .container-sm {
+    max-width: 540px;
+}
+
+.container, .container-fluid, .container-lg, .container-md, .container-sm, .container-xl, .container-xxl {
+    width: 100%;
+    padding-right: var(--bs-gutter-x,.75rem);
+    padding-left: var(--bs-gutter-x,.75rem);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media (max-width: 768px)
+.login-10 .form-section {
+    padding: 50px 30px;
+}
+
+.login-10 .form-section {
+    max-width: 550px;
+    margin: 0 auto;
+    padding: 70px 50px;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 35px rgb(0 0 0 / 10%);
+    position: relative;
+    z-index: 999;
+}
+
+.login-10 .form-section h3 {
+    margin: 0 0 30px;
+    font-size: 25px;
+    font-weight: 400;
+    color: #040404;
+    text-align: center;
+}
+
+.login-45 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Jost', sans-serif;
+}
+
+.login-10 .form-section .form-group {
+    margin-bottom: 25px;
+}
+
+.login-10 .form-section .form-control {
+    font-size: 16px;
+    outline: none;
+    background: #efefef;
+    padding: 12px 25px;
+    color: #535353;
+    height: 60px;
+    border-radius: 3px;
+    border: 1px solid #efefef;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+.login-10 .form-section .form-group {
+    margin-bottom: 25px;
+}
+
+.login-10 .form-section .form-group {
+    margin-bottom: 25px;
+}
+.mb-0 {
+    margin-bottom: 0!important;
+}
+
+.login-10 .form-section .btn-theme {
+    background: #526fff;
+    box-shadow: 0 0 5px rgb(0 0 0 / 20%);
+    border: none;
+    color: #fff;
+}
+
+.login-10 .form-section .btn-md {
+    cursor: pointer;
+    height: 60px;
+    color: #fff;
+    padding: 13px 50px 12px 50px;
+    font-size: 17px;
+    font-weight: 400;
+    font-family: 'Jost', sans-serif;
+    border-radius: 3px;
+}
+[type=button]:not(:disabled), [type=reset]:not(:disabled), [type=submit]:not(:disabled), button:not(:disabled) {
+    cursor: pointer;
+}
+.float-start {
+    float: left!important;
+}
+[type=button], [type=reset], [type=submit], button {
+    -webkit-appearance: button;
+}
+button, select {
+    text-transform: none;
+}
+
+.already-member {
+  margin-top: 30px;
+}
+
+.thembo {
+  border-bottom: solid 1px #526fff;
+}
+
+.thembo:hover {
+  background-color: #526fff;
+}
