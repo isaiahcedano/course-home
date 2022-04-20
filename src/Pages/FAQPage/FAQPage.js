@@ -381,7 +381,11 @@ const FAQPage = () => {
               <div className="cd-faq__content">
                 <div className="text-component">
                   <p>
-                    The payment for any course is only through bitcoin. There is a guide where we'll indicate how to buy and send bitcoin.
+                    Once all the items are added into the cart and you have logged in, you will be proceeded to the checkout page.
+                    Here, send specified amount of bitcoin to the address, and to make sure all goes well, send an email address here:
+                    coursehome22@gmail.com indicating the courses you've purchased along with a photo of the bitcoin transaction.
+                    Once verified, we will send you the course(s) with their corresponding links and passwords.
+                    The payment for any course is only through bitcoin.
                   </p>
                 </div>
               </div>{" "}
@@ -400,21 +404,6 @@ const FAQPage = () => {
               </div>{" "}
               {/* cd-faq__content */}
             </li>
-            <li className="cd-faq__item">
-              <a className="cd-faq__trigger" href="#0">
-                <span>
-                  Will I recieve an invoice?
-                </span>
-              </a>
-              <div className="cd-faq__content">
-                <div className="text-component">
-                  <p>
-                    Yes. A bitcoin invoice will be sent to the email address you registered with.
-                  </p>
-                </div>
-              </div>{" "}
-              {/* cd-faq__content */}
-            </li>
           </ul>{" "}
           {/* cd-faq__group */}
           <ul id="delivery" className="cd-faq__group">
@@ -428,33 +417,7 @@ const FAQPage = () => {
               <div className="cd-faq__content">
                 <div className="text-component">
                   <p>
-                    As soon as the purchase is successful, the course(s) with their corresponding cloud (mega, koofr, media) links as well with their password (if any) will be sent to the registered email address.
-                  </p>
-                </div>
-              </div>{" "}
-              {/* cd-faq__content */}
-            </li>
-            <li className="cd-faq__item">
-              <a className="cd-faq__trigger" href="#0">
-                <span>What should I do if my course hasn't arrived?</span>
-              </a>
-              <div className="cd-faq__content">
-                <div className="text-component">
-                  <p>
-                    If after at most 1 hour you're purchase hasn't been sent to you, contact customer service immediately.
-                  </p>
-                </div>
-              </div>{" "}
-              {/* cd-faq__content */}
-            </li>
-            <li className="cd-faq__item">
-              <a className="cd-faq__trigger" href="#0">
-                <span>What if the courses are sent to the wrong email address?</span>
-              </a>
-              <div className="cd-faq__content">
-                <div className="text-component">
-                  <p>
-                    This will not happen. Before purchase, you must register with an email address to which we send a confirmation link.
+                    Because of the difference of time zone, 1-16 hours.
                   </p>
                 </div>
               </div>{" "}

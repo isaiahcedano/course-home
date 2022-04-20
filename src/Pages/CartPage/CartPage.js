@@ -47,6 +47,34 @@ const getPrice = (quantity, price) => {
 }
 
 const CartPage = ({cart, products, eliminateAll, setRoute, loggedIn}) => {
+
+  const [checkoutLink, setCheckoutLink] = useState("");
+
+  useEffect(() => {
+    if (loggedIn[0]) {
+      fetch(`https://house-of-courses-api.herokuapp.com/user?token=${loggedIn[1]}`)
+      .then(resp => resp.json())
+      .then(user => {
+        const [username, email] = user;
+        fetch("https://house-of-courses-api.herokuapp.com/purchase", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username,
+            email,
+            cart: cart[0]
+          })
+        }).then(resp => resp.json())
+        .then(link => {
+          setCheckoutLink(link);
+        })
+      })
+    }
+
+  }, [loggedIn, cart]);
+
   return (
     <>
       <div className="cart_section">
@@ -110,9 +138,16 @@ const CartPage = ({cart, products, eliminateAll, setRoute, loggedIn}) => {
                   <button type="button" className="button cart_button_clear" onClick={eliminateAll}>
                     Clear Cart
                   </button>
-                  <Link className="button cart_button_checkout" to={`${loggedIn[0] ? '/checkout' : '/login'}`}>
-                    Checkout
-                  </Link>
+                  {
+                    loggedIn[0] ?
+                    <a className="button cart_button_checkout" href={checkoutLink}>
+                      Checkout
+                    </a> :
+                    <Link className="button cart_button_checkout" to={"/login"}>
+                      Checkout
+                    </Link>
+                  }
+
                 </div>
               </div>
             </div>

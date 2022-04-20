@@ -51,17 +51,10 @@ const Header = ({addToCart,
   const [username, setUsername] = useState("User");
 
   useEffect(() => {
-    fetch("https://house-of-courses-api.herokuapp.com/user", {
-      method: "POST",
-      body: JSON.stringify({
-        token: loggedIn[1],
-      }),
-      headers: {
-        "Content-Type": "application/json"
-      }
-    }).then(resp => resp.json()).then(user => {
-      if (user) {
-        setUsername(user.match(/^\S+/)[0])
+    fetch(`https://house-of-courses-api.herokuapp.com/user?token=${loggedIn[1]}`)
+      .then(resp => resp.json()).then(user => {
+      if (user[0]) {
+        setUsername(user[0].match(/^\S+/)[0])
       }
     })
   }, [loggedIn])
@@ -84,7 +77,7 @@ const Header = ({addToCart,
                   </div>
                   <a href="mailto:coursehome22@gmail.com">coursehome22@gmail.com</a>
                 </div>
-                <div className={`top_bar_content ml-auto ${loggedIn ? 'header-user-active' : ''}`}>
+                <div className={`top_bar_content ml-auto ${loggedIn[0] ? 'header-user-active' : ''}`}>
                   <div className="top_bar_user">
                     <div className="user_icon">
                       <img
