@@ -42,10 +42,6 @@ const Header = ({addToCart,
       title: "DMCA",
       link: "/dmca"
     },
-    {
-      title: "Request Course",
-      link: "/request"
-    }
   ]
 
   const [username, setUsername] = useState("User");

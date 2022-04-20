@@ -79,7 +79,7 @@ const HomeShop = ({amountOfProducts, products, route, setRoute}) => {
                   !products[selectedCategory]
                   .filter(({title}) =>
                   title.toLowerCase().includes(searchBar.toLowerCase())).length ?
-                  <p className={"no-search-results"}>No results. <Link to={"/request"}>Request the course you're looking for.</Link></p> : null
+                  <p className={"no-search-results"}>No results. Send an email to the above address requesting the course you're looking for. Make sure to include the owner's name, and the sales page.</p> : null
                 }
 
               </div>
