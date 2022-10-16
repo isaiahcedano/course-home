@@ -42,25 +42,23 @@ export const eliminateAllItems = () => ({
 });
 
 export const setProductDatabase = () => async dispatch => {
-  if (!JSON.parse(localStorage.getItem("products"))) {
-    try {
-      const fetchBase = "https://house-of-courses-api.herokuapp.com";
-      dispatch({
-        type: REQUEST_PRODUCT_DATABASE_PENDING
-      });
+  try {
+    const fetchBase = "https://house-of-courses-api.herokuapp.com";
+    dispatch({
+      type: REQUEST_PRODUCT_DATABASE_PENDING
+    });
 
-      const products = await fetch(`${fetchBase}/products`)
-      .then(resp => resp.json());
+    const products = await fetch(`${fetchBase}/products`)
+    .then(resp => resp.json());
 
-      dispatch({
-        payload: products,
-        type: REQUEST_PRODUCT_DATABASE_RESOLVED
-      });
-    } catch(err) {
-      dispatch({
-        type: REQUEST_PRODUCT_DATABASE_REJECTED,
-      })
-    }
+    dispatch({
+      payload: products,
+      type: REQUEST_PRODUCT_DATABASE_RESOLVED
+    });
+  } catch(err) {
+    dispatch({
+      type: REQUEST_PRODUCT_DATABASE_REJECTED,
+    })
   }
 }
 
