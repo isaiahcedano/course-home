@@ -57,9 +57,7 @@ const App = ({products,
   const location = useLocation();
 
   useEffect(() => {
-    if (!Object.entries(products).length) {
-      setDatabase();
-    }
+    setDatabase();
 
     if (loggedIn[0]) {
       validSignin(loggedIn, JSON.parse(localStorage.getItem("login")))
